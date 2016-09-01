@@ -61,6 +61,8 @@ TensorLayer很简单
   network = tl.layers.DenseLayer(network, n_units=800,
                                   act = tf.nn.relu, name='relu2')
   network = tl.layers.DropoutLayer(network, keep=0.5, name='drop3')
+  # softmax 在 tl.cost.cross_entropy(y, y_) 内部实现，以加快计算，所以输出层用 identity
+  # 请见 tf.nn.sparse_softmax_cross_entropy_with_logits()
   network = tl.layers.DenseLayer(network, n_units=10,
                                   act = tl.activation.identity,
                                   name='output_layer')
